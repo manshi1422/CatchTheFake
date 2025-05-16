@@ -14,9 +14,11 @@ import {auth} from "./firebase/firebase";
 import { useSnackbar } from "notistack";
 import Navbar from "./components/Navbar";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "./context/authcontext";
 
 function SignIn() {
   const { enqueueSnackbar } = useSnackbar();
+        const { setUser } = useUser();
 const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,8 +28,8 @@ const navigate = useNavigate();
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        // Signed up
-        // ...
+        setUser({email:email})
+        localStorage.setItem("email",email);
         enqueueSnackbar("user login successfully!", { variant: "success" });
         navigate("/home")
       })
@@ -45,6 +47,8 @@ const navigate = useNavigate();
         // Signed up
         // const user = userCredential.user;
         // ...
+        setUser({email:email})
+        localStorage.setItem("email",email);
         enqueueSnackbar("user create successfully!", { variant: "success" });
         navigate("/home")
       })

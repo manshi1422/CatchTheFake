@@ -1,56 +1,29 @@
-import React, { useContext, useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import {auth} from '../../firebase/firebase';
-const  authdefault =  {
-   userLoggedIn:false,
-    isEmailUser:false,
-    currentUser:false,
-    setCurrentUser:false
-}
-const AuthContext = React.createContext<any>(authdefault);
+// src/context/UserContext.tsx
+import  { createContext, useContext, useState, type ReactNode,  } from 'react';
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
+type User = {
+  email: string;
+};
 
-export function AuthProvider({ children }:any) {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
-  const [isEmailUser, setIsEmailUser] = useState(false);
-  const [loading, setLoading] = useState(true);
+type UserContextType = {
+  user: User | null;
+  setUser: (user: User | null) => void;
+};
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, initializeUser);
-    return unsubscribe;
-  }, []);
+const UserContext = createContext<UserContextType | undefined>(undefined);
 
-  async function initializeUser(user:any) {
-    if (user) {
-
-      setCurrentUser({ ...user });
-      const isEmail = user.providerData.some(
-        (provider:any) => provider.providerId === "password"
-      );
-      setIsEmailUser(isEmail);
-      setUserLoggedIn(true);
-    } else {
-      setCurrentUser(null);
-      setUserLoggedIn(false);
-    }
-
-    setLoading(false);
-  }
-
-  const value = {
-    userLoggedIn,
-    isEmailUser,
-    currentUser,
-    setCurrentUser
-  };
+export const UserProvider = ({ children }: { children: ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null);
 
   return (
-    <AuthContext.Provider value={value}>
-      {!loading && children}
-    </AuthContext.Provider>
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
   );
-}
+};
+
+export const useUser = () => {
+  const context = useContext(UserContext);
+  if (!context) throw new Error('useUser must be used within a UserProvider');
+  return context;
+};

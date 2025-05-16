@@ -26,7 +26,6 @@ const GameOver = (props: any) => {
     }
     setOpenLeaderboard(true);
   };
-  console.log(leaderboardData, "leaderboardData");
 
   return (
     //   <div className="step1">
@@ -51,7 +50,7 @@ const GameOver = (props: any) => {
           >
             <Table stickyHeader sx={{borderCollapse:"collapse"}}>
               <TableBody>
-                {leaderboardData.map((user: any, index: number) => {
+                {leaderboardData.sort((a:any, b:any) => b.score - a.score)?.map((user: any, index: number) => {
                   const isYou = true;
                   // user.name.includes('(you)');
                   return (

@@ -11,7 +11,9 @@ import ImageCarousal from "./ImageCarousal";
 import GameOver from "./GameOver";
 import { push, ref, set } from "firebase/database";
 import { enqueueSnackbar } from "notistack";
+import { useUser } from "../context/authcontext";
 const StartGame = () => {
+    const { user } = useUser();
   const images = [
   {
     img: Fake,
@@ -38,6 +40,7 @@ const StartGame = () => {
     fake: true,
   },
 ];
+
   const [currScore, setCurrScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [imagesArr, setImagesArr] = useState(images);
@@ -55,7 +58,7 @@ const StartGame = () => {
       setGameOver(true);
       const newScoreRef = push(ref(db,"scores"))
       set(newScoreRef,{
-        user:"manshi",
+        user:localStorage.getItem("email"),
         score:currScore
       }).then(()=>{
         enqueueSnackbar("score added!",{variant:'success'})
