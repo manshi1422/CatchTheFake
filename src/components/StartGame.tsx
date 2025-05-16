@@ -1,6 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
-// import auth from "../firebase/firebase";
+import { useState } from "react";
 import {db} from "../firebase/firebase";
 import Navbar from "./Navbar";
 import redhalfcircle from "../assets/redhalfcircle.png";

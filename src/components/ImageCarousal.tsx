@@ -1,13 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import Slider from "react-slick";
-import Fake from "../assets/F1.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CancelTwoToneIcon from "@mui/icons-material/CancelTwoTone";
 import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
 import { Box, IconButton } from "@mui/material";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
-import Draggable from "react-draggable";
 
  // Replace with your actual paths
 
@@ -44,13 +41,7 @@ const ImageCarousel = (props:any) => {
         zIndex: 5,
       }}
     >
-      {/* <> */}
-      {/* <IconButton
-        sx={{ position: 'absolute', top: '40%', left: 0, zIndex: 2 }}
-        onClick={() => sliderRef.current.slickPrev()}
-      >
-        <ArrowBackIos />
-      </IconButton> */}
+    
 
       <Slider ref={sliderRef} {...settings}>
         {props.imagesArr.map((img:any, index:number) => (
@@ -79,12 +70,6 @@ const ImageCarousel = (props:any) => {
         ))}
       </Slider>
 
-      {/* <IconButton
-        sx={{ position: 'absolute', top: '40%', right: 0, zIndex: 2 }}
-        onClick={() => sliderRef.current.slickNext()}
-      >
-        <ArrowForwardIos />
-      </IconButton> */}
     </Box>
   );
 };

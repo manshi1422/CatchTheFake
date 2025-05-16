@@ -1,12 +1,9 @@
-import React, { useState } from "react";
-// import { Link } from 'react-router-dom';
+import  { useState } from "react";
 import {
-  Container,
   TextField,
   Button,
   Typography,
   Box,
-  Link,
   Grid,
 } from "@mui/material";
 import {
@@ -15,7 +12,6 @@ import {
 } from "firebase/auth";
 import {auth} from "./firebase/firebase";
 import { useSnackbar } from "notistack";
-import { useAuth } from "./context/authcontext";
 import Navbar from "./components/Navbar";
 import { useNavigate } from "react-router-dom";
 
@@ -49,13 +45,13 @@ const navigate = useNavigate();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up
-        const user = userCredential.user;
+        // const user = userCredential.user;
         // ...
         enqueueSnackbar("user create successfully!", { variant: "success" });
         navigate("/home")
       })
       .catch((error) => {
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
         enqueueSnackbar(errorMessage, { variant: "error" });
 
