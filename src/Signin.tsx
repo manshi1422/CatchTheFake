@@ -25,15 +25,13 @@ const navigate = useNavigate();
   const handleSignIn = (e: any) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(() => {
         // Signed up
-        const user = userCredential.user;
         // ...
         enqueueSnackbar("user login successfully!", { variant: "success" });
         navigate("/home")
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         enqueueSnackbar(errorMessage, { variant: "error" });
 
@@ -43,7 +41,7 @@ const navigate = useNavigate();
    const handleSignUp = (e: any) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(() => {
         // Signed up
         // const user = userCredential.user;
         // ...
