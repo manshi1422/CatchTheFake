@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-// import { GoogleAuthProvider } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import {auth} from '../../firebase/firebase';
 const  authdefault =  {
@@ -18,7 +17,6 @@ export function AuthProvider({ children }:any) {
   const [currentUser, setCurrentUser] = useState(null);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [isEmailUser, setIsEmailUser] = useState(false);
-  const [isGoogleUser, setIsGoogleUser] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,19 +28,10 @@ export function AuthProvider({ children }:any) {
     if (user) {
 
       setCurrentUser({ ...user });
-
-      // check if provider is email and password login
       const isEmail = user.providerData.some(
         (provider:any) => provider.providerId === "password"
       );
       setIsEmailUser(isEmail);
-
-      // check if the auth provider is google or not
-    //   const isGoogle = user.providerData.some(
-    //     (provider) => provider.providerId === GoogleAuthProvider.PROVIDER_ID
-    //   );
-    //   setIsGoogleUser(isGoogle);
-
       setUserLoggedIn(true);
     } else {
       setCurrentUser(null);
@@ -55,7 +44,6 @@ export function AuthProvider({ children }:any) {
   const value = {
     userLoggedIn,
     isEmailUser,
-    isGoogleUser,
     currentUser,
     setCurrentUser
   };

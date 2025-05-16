@@ -100,7 +100,7 @@ const GameOver = (props: any) => {
               fullWidth
               variant="contained"
               sx={{ mt: 2 }}
-              onClick={(e) => {
+              onClick={() => {
                 handleOpenLeaderboard();
               }}
               className="Button"
@@ -135,7 +135,7 @@ const GameOver = (props: any) => {
               fullWidth
               variant="contained"
               sx={{ mt: 2 }}
-              onClick={(e) => {
+              onClick={() => {
                 handleOpenLeaderboard();
               }}
               className="Button"
