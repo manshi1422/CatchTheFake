@@ -11,9 +11,7 @@ import ImageCarousal from "./ImageCarousal";
 import GameOver from "./GameOver";
 import { push, ref, set } from "firebase/database";
 import { enqueueSnackbar } from "notistack";
-import { useUser } from "../context/authcontext";
 const StartGame = () => {
-    const { user } = useUser();
   const images = [
   {
     img: Fake,
